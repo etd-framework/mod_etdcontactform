@@ -25,6 +25,7 @@ if ($contact) {
 
     foreach (JPluginHelper::getPlugin('captcha') as $plugin) {
         if ($captchaSet === $plugin->name) {
+            $form->setFieldAttribute('captcha', 'plugin', $plugin->name);
             $captchaEnabled = true;
             break;
         }
