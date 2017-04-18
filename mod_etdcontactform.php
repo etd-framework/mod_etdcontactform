@@ -20,5 +20,15 @@ if ($contact) {
 
     $form = ModContactHelper::getContactForm();
 
+    $captchaEnabled = false;
+    $captchaSet     = $cparams->get('captcha', JFactory::getApplication()->get('captcha', '0'));
+
+    foreach (JPluginHelper::getPlugin('captcha') as $plugin) {
+        if ($captchaSet === $plugin->name) {
+            $captchaEnabled = true;
+            break;
+        }
+    }
+
     require JModuleHelper::getLayoutPath('mod_etdcontactform', $params->get('layout', 'default'));
 }

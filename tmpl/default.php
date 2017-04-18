@@ -19,37 +19,31 @@ if (isset($contact->error)) : ?>
     </div>
 <?php endif; ?>
 <div class="etd-contact-form">
-    <form id="etd-contact-form" action="<?php echo JUri::getInstance()->toString(); ?>" method="post" class="form-validate">
-        <fieldset>
-            <?php foreach ($form->getFieldsets() as $fieldset) : ?>
-                <?php $fields = $form->getFieldset($fieldset->name); ?>
+    <form id="contact-form" action="<?php echo JRoute::_('index.php'); ?>" method="post" class="form-validate well">
+        <?php foreach ($form->getFieldsets() as $fieldset): ?>
+            <?php if ($fieldset->name === 'captcha' && !$captchaEnabled) : ?>
+                <?php continue; ?>
+            <?php endif; ?>
+            <?php $fields = $form->getFieldset($fieldset->name); ?>
+            <?php if (count($fields)) : ?>
                 <?php foreach ($fields as $field) : ?>
-                    <?php if($field->type == 'Checkbox') : ?>
-                        <div class="checkbox">
-                            <label id="<?php echo $field->id; ?>-lbl" for="<?php echo $field->id; ?>">
-                                <input name="<?php echo $field->name; ?>" id="<?php echo $field->id; ?>" value="" type="checkbox">
-                                <?php echo JText::_($form->getFieldAttribute($field->fieldname, 'label')); ?>
-                            </label>
-                        </div>
-                    <?php else: ?>
-                        <div class="form-group">
-                            <?php if ($field->hidden) : ?>
-                                <?php echo $field->input; ?>
-                            <?php else: ?>
-                                <?php echo $field->label; ?>
-                                <div><?php echo $field->input; ?></div>
-                            <?php endif; ?>
-                        </div>
+                    <?php if ($field->name === 'contact_email_copy' && !$params->get('show_email_copy')) : ?>
+                        <?php continue; ?>
                     <?php endif; ?>
+                    <div class="form-group">
+                        <?php echo $field->label; ?>
+                        <?php echo $field->input; ?>
+                    </div>
                 <?php endforeach; ?>
-            <?php endforeach; ?>
-            <div class="form-actions">
-                <button class="btn btn-primary validate" type="submit"><?php echo JText::_('MOD_CONTACT_CONTACT_SEND'); ?></button>
-                <input type="hidden" name="option" value="com_contact" />
-                <input type="hidden" name="task" value="contact.submit" />
-                <input type="hidden" name="id" value="<?php echo $contact->slug; ?>" />
-                <?php echo JHtml::_('form.token'); ?>
-            </div>
-        </fieldset>
+            <?php endif; ?>
+        <?php endforeach; ?>
+        <div class="form-group">
+            <button class="btn btn-info btn-submit validate" type="submit"><?php echo JText::_('MOD_ETDCONTACTFORM_CONTACT_SEND'); ?></button>
+            <input type="hidden" name="option" value="com_contact" />
+            <input type="hidden" name="task" value="contact.submit" />
+            <input type="hidden" name="return" value="<?php echo JUri::current(); ?>" />
+            <input type="hidden" name="id" value="<?php echo $contact->slug; ?>" />
+            <?php echo JHtml::_('form.token'); ?>
+        </div>
     </form>
 </div>
