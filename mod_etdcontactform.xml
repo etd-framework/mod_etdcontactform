@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<extension type="module" version="1.0" client="site" method="upgrade">
+	<name>MOD_ETDCONTACTFORM</name>
+	<author>ETD Solutions</author>
+	<creationDate>03/03/2017</creationDate>
+	<copyright>Copyright (C) 2017 ETD Solutions. All rights reserved.</copyright>
+	<license>Apache License version 2 or later; see LICENSE.md</license>
+	<authorEmail>contact@etd-solutions.com</authorEmail>
+	<version>1.0.0</version>
+	<description>MOD_ETDCONTACTFORM_XML_DESCRIPTION</description>
+	<files>
+		<filename module="mod_etdcontactform">mod_etdcontactform.php</filename>
+		<folder>tmpl</folder>
+		<filename>mod_etdcontactform.xml</filename>
+		<filename>helper.php</filename>
+	</files>
+	<languages>
+		<language tag="en-GB">language/en-GB/en-GB.mod_etdcontactform.ini</language>
+		<language tag="en-GB">language/en-GB/en-GB.mod_etdcontactform.sys.ini</language>
+		<language tag="fr-FR">language/fr-FR/fr-FR.mod_etdcontactform.ini</language>
+		<language tag="fr-FR">language/fr-FR/fr-FR.mod_etdcontactform.sys.ini</language>
+	</languages>
+	<config>
+		<fields name="params" addfieldpath="/administrator/components/com_contact/models/fields">
+			<fieldset name="basic">
+				<field name="id"
+				   type="modal_contact"
+				   label="MOD_CONTACT_ADMIN_FORM_FIELD_SELECT_CONTACT_LABEL"
+				   description="MOD_CONTACT_ADMIN_FORM_FIELD_SELECT_CONTACT_DESC"
+				   required="true"
+				   clear="false"
+				/>
+			</fieldset>
+
+			<fieldset name="advanced">
+
+				<field name="pageclass_sfx" type="text"
+					   label="MOD_CONTACT_ADMIN_FORM_FIELD_PAGE_CLASS_LABEL"
+					   description="MOD_CONTACT_ADMIN_FORM_FIELD_PAGE_CLASS_DESC" />
+
+		</fieldset>
+		</fields>
+	</config>
+</extension>
