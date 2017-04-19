@@ -31,5 +31,8 @@ if ($contact) {
         }
     }
 
+    $lang = JFactory::getLanguage();
+    $lang->load('com_contact');
+
     require JModuleHelper::getLayoutPath('mod_etdcontactform', $params->get('layout', 'default'));
 }
